@@ -1,3 +1,9 @@
+## Installation
+terraform init
+az account set -s Bank\ of\ America\ Prod\ LZ
+terraform plan -out myplan
+terraform apply myplan
+
 ## Requirements
 
 | Name | Version |

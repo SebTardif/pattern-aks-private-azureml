@@ -22,13 +22,6 @@ resource "azurerm_subnet" "acr" {
   address_prefixes                               = ["10.255.0.160/27"]
 }
 
-resource "azurerm_subnet" "jumpbox" {
-  name                 = "JumpboxSubnet"
-  resource_group_name  = azurerm_resource_group.default.name
-  virtual_network_name = azurerm_virtual_network.default.name
-  address_prefixes     = ["10.255.255.240/28"]
-}
-
 # spokes
 #
 

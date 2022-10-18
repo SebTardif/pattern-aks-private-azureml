@@ -9,9 +9,6 @@ set -e
 # - kubectl
 # - terraform
 
-source aml-extension-deploy.sh
-source azure-files-nfs.sh
-
 __usage="
 Available Commands:
     [-x  action]        action to be executed.
@@ -53,11 +50,6 @@ checkDependencies() {
   fi
 }
 
-do_demo_bootstrap() {
-  aml_demo_entrypoint
-  nfs_demo_entrypoint
-}
-
 terraformDance() {
   # Assumes you're already logged into Azure
   terraform init
@@ -82,7 +74,6 @@ destroy() {
 
 run() {
   terraformDance
-  do_demo_bootstrap
 }
 
 exec_case() {

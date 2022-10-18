@@ -122,7 +122,3 @@ variable "aks_admin_group_object_ids" {
 
 variable "user_assigned_identity" {
 }
-
-variable "storagefile_private_dns_zone_ids" {
-  type = list
-}

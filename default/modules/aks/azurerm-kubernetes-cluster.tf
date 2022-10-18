@@ -22,6 +22,7 @@ resource "azurerm_kubernetes_cluster" "dev" {
     os_disk_size_gb     = var.default_node_pool.os_disk_size_gb
     type                = var.default_node_pool.type
     vnet_subnet_id      = var.subnet_id
+    zones   = ["1", "2"]
   }
 
   identity {
@@ -86,4 +87,5 @@ resource "azurerm_kubernetes_cluster_node_pool" "user" {
   node_labels           = each.value.node_labels
   vnet_subnet_id        = var.subnet_id
   node_taints           = each.value.node_taints
+  zones   = ["1", "2"]
 }

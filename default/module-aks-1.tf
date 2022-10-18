@@ -14,13 +14,6 @@ resource "azurerm_role_assignment" "aks-mi-roles" {
 # cluster-1
 #
 
-# NFS
-resource "azurerm_role_assignment" "aks-mi-roles-nfs-storage" {
-  scope                = azurerm_private_dns_zone.nfs_storagefile.id
-  role_definition_name = "Contributor"
-  principal_id         = azurerm_user_assigned_identity.managed-id.principal_id
-}
-
 resource "azurerm_role_assignment" "aks-mi-roles-vnet-rg" {
   scope                = azurerm_resource_group.default.id
   role_definition_name = "Contributor"
@@ -86,13 +79,9 @@ module "aks-1" {
     azurerm_private_dns_zone.acr.id
   ]
 
-  storagefile_private_dns_zone_ids = [
-    azurerm_private_dns_zone.nfs_storagefile.id
-  ]
-
   private_dns_zone_id = azurerm_private_dns_zone.aksPrivateZone.id
 
-  cluster_name = "${local.prefix}azureml${local.suffix}"
+  cluster_name = "${local.prefix}aks${local.suffix}"
   aks_settings = {
     kubernetes_version      = null
     private_cluster_enabled = true
@@ -115,18 +104,20 @@ module "aks-1" {
     node_count                   = 2
     min_count                    = 2
     max_count                    = 3
-    vm_size                      = "Standard_D4s_v3"
+    vm_size                      = "Standard_D2_v2"
     type                         = "VirtualMachineScaleSets"
     os_disk_size_gb              = 30
     only_critical_addons_enabled = true
+    max_pods                     = 250
   }
 
   user_node_pools = {
     "usernp1" = {
-      vm_size     = "Standard_D4s_v3"
+      vm_size     = "Standard_B4ms"
       node_count  = 3
       node_labels = null
       node_taints = []
+      max_pods    = 250
     }
   }
 }

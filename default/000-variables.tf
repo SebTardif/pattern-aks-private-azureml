@@ -7,7 +7,7 @@ variable "prefix" {
 variable "location" {
   type        = string
   description = "Default Azure Region"
-  default     = "westus3"
+  default     = "eastus" # westus
 }
 
 variable "custom_domain" {
