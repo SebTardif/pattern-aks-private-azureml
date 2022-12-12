@@ -6,3 +6,4 @@ terraform.tfstate.backup
 terraform.tfvars
 default/manifests/private-azure-file-sc.yaml
 myplan
+default/plan
